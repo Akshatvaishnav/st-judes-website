@@ -103,8 +103,11 @@ function HomePage() {
               <span className="text-gradient-gold">Academic Session 2026–27</span>
             </h1>
             <p className="mt-5 text-lg md:text-xl text-primary-foreground/90 max-w-2xl">
-              Empowering young minds through quality education, values and holistic
-              development at St. Jude's School, Fatehnagar.
+              Empowering young minds through quality education, values and <br />
+              holistic development at St. Jude's School, Fatehnagar.
+            </p>
+            <p className="mt-8 text-sm text-primary-foreground/80">
+            NEW LEADERSHIP • RENEWED VISION • BRIGHTER FUTURE
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/admissions" className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-elegant hover:brightness-95 transition">
