@@ -21,8 +21,8 @@ const classes = [
   { title: "Pre-Primary", range: "Nursery – KG", desc: "Play-based learning that builds curiosity and confidence." },
   { title: "Primary", range: "Class I – V", desc: "Strong foundations in literacy, numeracy and inquiry." },
   { title: "Middle School", range: "Class VI – VIII", desc: "Concept mastery and exploration of interests." },
-  { title: "Secondary", range: "Class IX – X", desc: "Focused academics and skill development." },
-  { title: "Senior Secondary", range: "Class XI – XII", desc: "Streams that prepare students for higher education." },
+  //{ title: "Secondary", range: "Class IX – X", desc: "Focused academics and skill development." },
+  //{ title: "Senior Secondary", range: "Class XI – XII", desc: "Streams that prepare students for higher education." },
 ];
 
 const methods = [
@@ -117,7 +117,7 @@ function AcademicsPage() {
               "Regular academic assessments with parental feedback",
               "Individual learning plans where needed",
               "Career guidance and counselling",
-              "Strong board exam preparation support",
+              "Strong exam preparation support",
             ].map((i) => (
               <li key={i} className="flex gap-2.5 items-start"><CheckCircle2 className="h-5 w-5 text-gold shrink-0 mt-0.5" />{i}</li>
             ))}

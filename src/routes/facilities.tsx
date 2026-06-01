@@ -28,7 +28,7 @@ const facilities = [
   { img: facComputer, title: "Computer Lab", desc: "Modern computer lab with high-speed internet and updated software for digital learning.", benefits: ["Coding and IT skills", "Hands-on practice", "Future-ready learners"] },
   { img: facPlayground, title: "Playground", desc: "Spacious, safe playground for sports, games and physical development.", benefits: ["Physical fitness", "Team spirit", "Outdoor learning"] },
   { img: facActivity, title: "Activity Areas", desc: "Dedicated rooms for art, music, dance and other creative pursuits.", benefits: ["Creative expression", "Skill exploration", "Confidence building"] },
-  { img: facBus, title: "Transportation", desc: "Safe, GPS-enabled school buses with trained drivers and attendants.", benefits: ["Reliable pickup", "Trained staff", "Safety-first protocols"] },
+  { img: facBus, title: "Transportation", desc: "Safe, school vans with trained drivers.", benefits: ["Reliable pickup", "Trained staff", "Safety-first protocols"] },
 ];
 
 const support = [
