@@ -26,9 +26,9 @@ function ContactPage() {
       <section className="container-page py-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { icon: MapPin, title: "Address", value: "Fatehnagar, Udaipur, Rajasthan, India" },
-          { icon: Phone, title: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
-          { icon: MessageCircle, title: "WhatsApp", value: "+91 98765 43210", href: "https://wa.me/919876543210" },
-          { icon: Mail, title: "Email", value: "info@stjudesfatehnagar.edu.in", href: "mailto:info@stjudesfatehnagar.edu.in" },
+          { icon: Phone, title: "Phone", value: "+91 70233 35023", href: "tel:+917023335023" },
+          { icon: MessageCircle, title: "WhatsApp", value: "+91 70233 35023", href: "https://wa.me/917023335023" },
+          { icon: Mail, title: "Email", value: "st.judesfnr@gmail.com", href: "mailto:st.judesfnr@gmail.com" },
         ].map((c) => (
           <a key={c.title} href={c.href ?? "#"} className="rounded-xl border border-border bg-card p-6 shadow-card hover:shadow-elegant transition block">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft text-primary"><c.icon className="h-6 w-6" /></div>
@@ -43,7 +43,7 @@ function ContactPage() {
         <div className="rounded-2xl overflow-hidden border border-border shadow-card min-h-[420px]">
           <iframe
             title="St. Jude's School Location"
-            src="https://www.google.com/maps?q=Fatehnagar,Udaipur,Rajasthan&output=embed"
+            src="https://www.google.com/maps?q=st.judeschhool,Fatehnagar,Udaipur,Rajasthan&output=embed"
             className="w-full h-full min-h-[420px]"
             loading="lazy"
           />

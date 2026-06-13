@@ -152,8 +152,8 @@ function AdmissionsPage() {
             <p className="mt-2 text-primary-foreground/85">Have questions? Our team is happy to help, every step of the way.</p>
           </div>
           <div className="flex flex-col sm:flex-row md:flex-col gap-3">
-            <a href="tel:+919876543210" className="inline-flex items-center justify-center gap-2 rounded-md bg-gold text-gold-foreground px-5 py-3 text-sm font-semibold"><Phone className="h-4 w-4" /> +91 98765 43210</a>
-            <a href="mailto:admissions@stjudesfatehnagar.edu.in" className="inline-flex items-center justify-center gap-2 rounded-md border border-white/40 bg-white/10 px-5 py-3 text-sm font-semibold backdrop-blur"><Mail className="h-4 w-4" /> Email Us</a>
+            <a href="tel:+917023335023" className="inline-flex items-center justify-center gap-2 rounded-md bg-gold text-gold-foreground px-5 py-3 text-sm font-semibold"><Phone className="h-4 w-4" /> +91 70233 35023</a>
+            <a href="mailto:st.judesfnr@gmail.com" className="inline-flex items-center justify-center gap-2 rounded-md border border-white/40 bg-white/10 px-5 py-3 text-sm font-semibold backdrop-blur"><Mail className="h-4 w-4" /> Email Us</a>
           </div>
         </div>
       </section>

@@ -53,8 +53,8 @@ export function Footer() {
           <h4 className="font-display font-semibold text-base mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-primary-foreground/85">
             <li className="flex gap-2.5"><MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" /> Fatehnagar, Udaipur, Rajasthan, India</li>
-            <li className="flex gap-2.5"><Phone className="h-4 w-4 mt-0.5 text-gold shrink-0" /> +91 98765 43210</li>
-            <li className="flex gap-2.5"><Mail className="h-4 w-4 mt-0.5 text-gold shrink-0" /> info@stjudesfatehnagar.edu.in</li>
+            <li className="flex gap-2.5"><Phone className="h-4 w-4 mt-0.5 text-gold shrink-0" /> <a href="tel:+917023335023" className="hover:text-gold transition">+91 7023335023</a></li>
+            <li className="flex gap-2.5"><Mail className="h-4 w-4 mt-0.5 text-gold shrink-0" /> <a href="mailto:st.judesfnr@gmail.com" className="hover:text-gold transition">st.judesfnr@gmail.com</a></li>
           </ul>
         </div>
 
