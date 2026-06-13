@@ -15,6 +15,8 @@ import galCultural from "@/assets/gallery-cultural.jpg";
 import galSports from "@/assets/gallery-sports.jpg";
 import students from "@/assets/students-group.jpg";
 
+import { siteConfig } from "@/config/site";
+
 const SCHOOL_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "School",
@@ -32,18 +34,29 @@ const SCHOOL_JSON_LD = {
 };
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "St. Jude's School Fatehnagar | Admissions Open 2026-27" },
-      { name: "description", content: "Admissions open at St. Jude's School, Fatehnagar, Udaipur. Quality education, experienced faculty, safe campus and holistic development for your child." },
-      { property: "og:title", content: "St. Jude's School Fatehnagar | Admissions Open 2026-27" },
-      { property: "og:description", content: "Empowering young minds through quality education, values and holistic development in Fatehnagar, Udaipur." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(SCHOOL_JSON_LD) }],
-  }),
+  head: () => {
+    const admissionsOpen = siteConfig.admissions.isOpen;
+    const session = siteConfig.admissions.session;
+    const title = admissionsOpen
+      ? `St. Jude's School Fatehnagar | Admissions Open ${session}`
+      : "St. Jude's School Fatehnagar | Quality English Medium School";
+    const desc = admissionsOpen
+      ? `Admissions open at St. Jude's School, Fatehnagar, Udaipur. Quality education, experienced faculty, safe campus and holistic development for your child.`
+      : "Welcome to St. Jude's School, Fatehnagar, Udaipur. Quality education, experienced faculty, safe campus and holistic development for your child.";
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "/" },
+      ],
+      links: [{ rel: "canonical", href: "/" }],
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(SCHOOL_JSON_LD) }],
+    };
+  },
   component: HomePage,
 });
 
@@ -81,6 +94,9 @@ const testimonials = [
 ];
 
 function HomePage() {
+  const admissionsOpen = siteConfig.admissions.isOpen;
+  const session = siteConfig.admissions.session;
+
   return (
     <SiteLayout>
       {/* Hero */}
@@ -96,11 +112,20 @@ function HomePage() {
         <div className="relative container-page py-24 md:py-36 text-primary-foreground">
           <div className="max-w-3xl animate-fade-up">
             <div className="inline-flex items-center gap-2 rounded-full bg-gold/95 text-gold-foreground px-4 py-1.5 text-xs font-semibold uppercase tracking-wider mb-5">
-              <Sparkles className="h-3.5 w-3.5" /> Admissions Open 2026-27
+              <Sparkles className="h-3.5 w-3.5" /> {admissionsOpen ? `Admissions Open ${session}` : "Welcome to St. Jude's"}
             </div>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05]">
-              Admissions Open for{" "}
-              <span className="text-gradient-gold">Academic Session 2026–27</span>
+              {admissionsOpen ? (
+                <>
+                  Admissions Open for{" "}
+                  <span className="text-gradient-gold">Academic Session {session}</span>
+                </>
+              ) : (
+                <>
+                  Nurturing Minds,{" "}
+                  <span className="text-gradient-gold">Shaping Brighter Futures</span>
+                </>
+              )}
             </h1>
             <p className="mt-5 text-lg md:text-xl text-primary-foreground/90 max-w-2xl">
               Empowering young minds through quality education, values and <br />
@@ -111,7 +136,7 @@ function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/admissions" className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-elegant hover:brightness-95 transition">
-                Apply Now <ArrowRight className="h-4 w-4" />
+                {admissionsOpen ? "Apply Now" : "Inquire Now"} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/contact" className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-primary-foreground backdrop-blur hover:bg-white/20 transition">
                 Contact Us
@@ -240,15 +265,16 @@ function HomePage() {
           <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, oklch(0.85 0.17 85 / 0.6), transparent 40%)" }} />
           <div className="relative">
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Begin Your Child's Journey Toward Excellence
+              {admissionsOpen ? "Begin Your Child's Journey Toward Excellence" : "Admissions Inquiry & Future Enrolment"}
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-primary-foreground/85">
-              Limited seats available for Academic Session 2026-27. Apply early to secure
-              your child's place at St. Jude's School.
+              {admissionsOpen
+                ? `Limited seats available for Academic Session ${session}. Apply early to secure your child's place at St. Jude's School.`
+                : `Admissions for Academic Session ${session} are currently closed. You can submit an inquiry to join the waitlist or contact our office for vacancy details.`}
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link to="/admissions" className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground hover:brightness-95">
-                Apply Now <ArrowRight className="h-4 w-4" />
+                {admissionsOpen ? "Apply Now" : "Submit Inquiry"} <ArrowRight className="h-4 w-4" />
               </Link>
               {/* <Link to="/contact" className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold backdrop-blur hover:bg-white/20">
                 <Calendar className="h-4 w-4" /> Schedule a Visit

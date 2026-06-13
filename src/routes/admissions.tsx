@@ -4,18 +4,30 @@ import { CheckCircle2, FileText, Search, ClipboardCheck, UserCheck, GraduationCa
 import { SiteLayout, PageHero } from "@/components/site/Layout";
 import { SectionHeading } from "./index";
 import { toast } from "sonner";
+import { siteConfig } from "@/config/site";
 
 export const Route = createFileRoute("/admissions")({
-  head: () => ({
-    meta: [
-      { title: "Admissions Open 2026-27 | St. Jude's School Fatehnagar" },
-      { name: "description", content: "Admissions open at St. Jude's School, Fatehnagar for academic session 2026-27. Apply online, see process, documents and FAQs." },
-      { property: "og:title", content: "Admissions 2026-27 — St. Jude's School" },
-      { property: "og:description", content: "Apply now for the 2026-27 academic session in Fatehnagar, Udaipur." },
-      { property: "og:url", content: "/admissions" },
-    ],
-    links: [{ rel: "canonical", href: "/admissions" }],
-  }),
+  head: () => {
+    const admissionsOpen = siteConfig.admissions.isOpen;
+    const session = siteConfig.admissions.session;
+    const title = admissionsOpen
+      ? `Admissions Open ${session} | St. Jude's School Fatehnagar`
+      : `Admissions Inquiry | St. Jude's School Fatehnagar`;
+    const desc = admissionsOpen
+      ? `Admissions open at St. Jude's School, Fatehnagar for academic session ${session}. Apply online, see process, documents and FAQs.`
+      : `Inquire about admissions and waitlist opportunities at St. Jude's School, Fatehnagar. See process, documents and FAQs.`;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:url", content: "/admissions" },
+      ],
+      links: [{ rel: "canonical", href: "/admissions" }],
+    };
+  },
   component: AdmissionsPage,
 });
 
@@ -36,8 +48,13 @@ const documents = [
   "Address proof",
 ];
 
-const faqs = [
-  { q: "When do admissions begin for 2026-27?", a: "Admissions are currently open. We encourage parents to apply early as seats are limited." },
+const getFaqs = (isOpen: boolean, session: string) => [
+  {
+    q: `When do admissions begin for ${session}?`,
+    a: isOpen
+      ? "Admissions are currently open. We encourage parents to apply early as seats are limited."
+      : `Admissions for the ${session} session are currently closed. However, you can submit an inquiry form below to join our waitlist for any upcoming vacancies.`
+  },
   { q: "What is the age criteria?", a: "Age criteria varies by class. Please contact our admissions office for the exact eligibility for your child's intended grade." },
   { q: "Is there an entrance test?", a: "For higher classes, an informal assessment may be conducted. For pre-primary, an interaction with the child and parents is held." },
   { q: "Do you offer transportation?", a: "Yes, we operate safe, GPS-enabled school buses across multiple routes around Fatehnagar and Udaipur." },
@@ -45,19 +62,38 @@ const faqs = [
 ];
 
 function AdmissionsPage() {
+  const admissionsOpen = siteConfig.admissions.isOpen;
+  const session = siteConfig.admissions.session;
+  const faqs = getFaqs(admissionsOpen, session);
+
   return (
     <SiteLayout>
-      <PageHero eyebrow="Admissions 2026-27" title="Begin your child's journey with us" subtitle="A simple, transparent admission process — designed with parents in mind." />
+      <PageHero
+        eyebrow={admissionsOpen ? `Admissions ${session}` : "Admissions Inquiry"}
+        title={admissionsOpen ? "Begin your child's journey with us" : "Admissions & Vacancy Inquiry"}
+        subtitle={admissionsOpen ? "A simple, transparent admission process — designed with parents in mind." : "Learn about our admission guidelines, waitlists, and future vacancies."}
+      />
 
       <section className="container-page py-16">
-        <div className="rounded-2xl bg-gold text-gold-foreground p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-elegant">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-widest">Now Open</div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold mt-1">Admissions for Academic Session 2026–27</h2>
-            <p className="mt-2 text-gold-foreground/80 text-sm">Limited seats. Apply early to secure your child's place.</p>
+        {admissionsOpen ? (
+          <div className="rounded-2xl bg-gold text-gold-foreground p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-elegant">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest">Now Open</div>
+              <h2 className="font-display text-2xl md:text-3xl font-bold mt-1">Admissions for Academic Session {session}</h2>
+              <p className="mt-2 text-gold-foreground/80 text-sm">Limited seats. Apply early to secure your child's place.</p>
+            </div>
+            <a href="#inquiry" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:opacity-95">Apply Now</a>
           </div>
-          <a href="#inquiry" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:opacity-95">Apply Now</a>
-        </div>
+        ) : (
+          <div className="rounded-2xl bg-secondary border border-border p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-card">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest text-destructive">Admissions Closed</div>
+              <h2 className="font-display text-2xl md:text-3xl font-bold mt-1 text-primary">Admissions for Session {session} are Closed</h2>
+              <p className="mt-2 text-muted-foreground text-sm">You may still submit an inquiry form below to join our waitlist for any mid-term or future vacancies.</p>
+            </div>
+            <a href="#inquiry" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:opacity-95">Submit Inquiry</a>
+          </div>
+        )}
       </section>
 
       <section className="container-page pb-20">
@@ -89,7 +125,14 @@ function AdmissionsPage() {
       </section>
 
       <section id="inquiry" className="container-page py-20 scroll-mt-20">
-        <SectionHeading eyebrow="Inquiry Form" title="Tell us about your child" subtitle="Fill out the form and our admissions team will get in touch within one working day." />
+        <SectionHeading
+          eyebrow="Inquiry Form"
+          title="Tell us about your child"
+          subtitle={admissionsOpen
+            ? "Fill out the form and our admissions team will get in touch within one working day."
+            : siteConfig.admissions.inquiryNotice
+          }
+        />
         <InquiryForm />
       </section>
 

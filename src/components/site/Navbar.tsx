@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { siteConfig } from "@/config/site";
 
 const links = [
   { to: "/", label: "Home" },
@@ -23,6 +24,8 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const admissionsOpen = siteConfig.admissions.isOpen;
 
   return (
     <header
@@ -60,7 +63,7 @@ export function Navbar() {
             to="/admissions"
             className="ml-2 inline-flex items-center justify-center rounded-md bg-gold px-4 py-2 text-sm font-semibold text-gold-foreground shadow-sm hover:brightness-95 transition"
           >
-            Apply Now
+            {admissionsOpen ? "Apply Now" : "Inquire"}
           </Link>
         </nav>
 
@@ -93,7 +96,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center rounded-md bg-gold px-4 py-2.5 text-sm font-semibold text-gold-foreground"
             >
-              Apply Now
+              {admissionsOpen ? "Apply Now" : "Inquire"}
             </Link>
           </div>
         </div>

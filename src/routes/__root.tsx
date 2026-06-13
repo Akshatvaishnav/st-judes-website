@@ -11,6 +11,7 @@ import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
+import { siteConfig } from "@/config/site";
 
 function NotFoundComponent() {
   return (
@@ -70,23 +71,31 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "St. Jude's School Fatehnagar | Quality Education in Udaipur" },
-      { name: "description", content: "St. Jude's School, Fatehnagar, Udaipur — quality education, experienced faculty, modern facilities and holistic development. Admissions open 2026-27." },
-      { property: "og:site_name", content: "St. Jude's School" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
+  head: () => {
+    const admissionsOpen = siteConfig.admissions.isOpen;
+    const session = siteConfig.admissions.session;
+    const desc = admissionsOpen
+      ? `St. Jude's School, Fatehnagar, Udaipur — quality education, experienced faculty, modern facilities and holistic development. Admissions open ${session}.`
+      : "St. Jude's School, Fatehnagar, Udaipur — quality education, experienced faculty, modern facilities and holistic development.";
+    
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: "St. Jude's School Fatehnagar | Quality Education in Udaipur" },
+        { name: "description", content: desc },
+        { property: "og:site_name", content: "St. Jude's School" },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        {
+          rel: "stylesheet",
+          href: appCss,
+        },
+      ],
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
